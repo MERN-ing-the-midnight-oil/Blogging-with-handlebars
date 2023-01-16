@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const apiRoutes = require("./api");
+const apiRoutes = require(".");
 const pageRoutes = require("./pageRoutes");
 
 router.use("/api", apiRoutes); //equivalent to localhost3001/api/
