@@ -28,7 +28,7 @@ router.get("/", withAuth, async (req, res) => {
 			//<-----------------//HANDLEBARS HANDLEBARS HANDLEBARS HANDLEBARS HANDLEBARS HANDLEBARS !!!
 			//renders home.handlebars
 			//blogsForTemplate, //hands the view the clean blogs
-			//logged_in: req.session.logged_in, //hands the view the user logged on status
+			logged_in: req.session.logged_in, //hands the view the user logged on status
 			data,
 		});
 	} catch (err) {

@@ -46,7 +46,7 @@ router.post("/login", withAuth, async (req, res) => {
 		req.session.save(() => {
 			//save is a method of the session object , calling "save" on the session object
 			req.session.user_id = userData.id; //tells "session" that it now has a user id that is what it is
-			req.session.logged_in = true; //tells "session" that it has a true logged in value
+			req.session.logged_in = true; //tells "session" that it has a true logged in value //had this off for some reason
 
 			res.json({ user: userData, message: "You are now logged in!" }); //server gives client a response object which is user data and a message
 		});
