@@ -1,11 +1,9 @@
-//All the routes in this file are branching from the root localhost3001 route base
-
 const router = require("express").Router(); //using the built in express router to trigger my routes
 const { Blogs, User } = require("../models"); //javascript will automatically find the models by looking in the root index.js
-//const withAuth = require('../utils/auth'); //will redirect un-logged in user to login
+const withAuth = require("../utils/auth"); //will redirect un-logged in user to login
 
 //rendering a home page view from the "/" URL path
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
 	//home page on 3001
 	try {
 		// Get all blogs and JOIN with user data
@@ -39,7 +37,7 @@ router.get("/", async (req, res) => {
 });
 
 //rendering a specific tech blog post from the "/post/:id" URL path
-router.get("/post/:id", async (req, res) => {
+router.get("/post/:id", withAuth, async (req, res) => {
 	try {
 		const specificBlog = await Blogs.findByPk(req.params.id, {
 			//searches the "Blogs" model
@@ -64,7 +62,7 @@ router.get("/post/:id", async (req, res) => {
 });
 
 //rendering all blog posts AKA the dashboard  // Use withAuth middleware to prevent access to route
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
 	//router.get("/dashboard", async (req, res) => {
 	try {
 		// Find the logged in user based on the session ID

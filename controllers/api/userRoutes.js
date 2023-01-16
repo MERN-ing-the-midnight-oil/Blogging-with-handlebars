@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 //user sign up, creating a user ID,etc
-router.post("/", async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
 	//"a single forward slash evaluates to "localhost3001/api/users/"
 	//when a user enters a password and user name in fields in the browser, hit submit, this route is executed.
 	//the content of that form is sent in the request body.
@@ -21,7 +22,7 @@ router.post("/", async (req, res) => {
 	}
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", withAuth, async (req, res) => {
 	//localhost3001/api/users/login
 	try {
 		const userData = await User.findOne({ where: { email: req.body.email } });
@@ -54,7 +55,7 @@ router.post("/login", async (req, res) => {
 	}
 });
 
-router.post("/logout", (req, res) => {
+router.post("/logout", withAuth, (req, res) => {
 	if (req.session.logged_in) {
 		//more logic done on a request body
 		req.session.destroy(() => {
