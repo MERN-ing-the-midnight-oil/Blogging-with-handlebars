@@ -4,7 +4,8 @@
 <section class="card">
   <!-- The contents of this card shows blog content using the post ID -->
   <a href="/post/{{id}}">
-    <!-- The card contains the entry_title as the card header -->
+    <!-- href references the specific post (established in router.get("/post/:id")
+    which references the Blogs model which has "entry_title" and "entry" columns -->
     <header>{{entry_title}}</header>
     <!-- The card also contains the entry content -->
     <p>{{entry}}</p>

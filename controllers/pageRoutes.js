@@ -19,18 +19,19 @@ router.get("/", async (req, res) => {
 			],
 		});
 		// Serialize data so the handlebars template can read it
-		const blogsForTemplate = blogData.map((stuff) =>
-			stuff.get({ plain: true })
-		); //strip out the metadata to make it cleaner before handing to fron end
-
+		const blogsForTemplate = blogData.map((blogstuff) =>
+			//strip out the metadata to make it cleaner before handing to fron end
+			blogstuff.get({ plain: true })
+		);
 		//console.log(blogsForTemplate);  //Per Jamie's advice..
-
+		data.blogsForTemplate = blogsForTemplate; //Jamie has this, not sure why
 		// Pass serialized data and session flag into template
-		res.render("home", {
+		blogsForTemplate.render("home", {
 			//<-----------------//HANDLEBARS HANDLEBARS HANDLEBARS HANDLEBARS HANDLEBARS HANDLEBARS !!!
 			//renders home.handlebars
-			blogsForTemplate, //hands the view the clean blogs
-			logged_in: req.session.logged_in, //hands the view the user logged on status
+			//blogsForTemplate, //hands the view the clean blogs
+			//logged_in: req.session.logged_in, //hands the view the user logged on status
+			data,
 		});
 	} catch (err) {
 		res.status(500).json(err);
@@ -63,7 +64,8 @@ router.get("/post/:id", async (req, res) => {
 });
 
 //rendering all blog posts AKA the dashboard  // Use withAuth middleware to prevent access to route
-router.get("/dashboard", withAuth, async (req, res) => {
+router.get("/dashboard", async (req, res) => {
+	//router.get("/dashboard", async (req, res) => {
 	try {
 		// Find the logged in user based on the session ID
 		const userData = await User.findByPk(req.session.user_id, {
