@@ -15,7 +15,7 @@ const loginFormHandler = async (event) => {
 
 		if (response.ok) {
 			// If successful posting a valid user name and password, redirect to the following endpoint
-			document.location.replace("/dashboard");
+			//	document.location.replace("/dashboard"); removed by LA's advice
 		} else {
 			alert(response.statusText);
 		}
@@ -39,7 +39,7 @@ const signupFormHandler = async (event) => {
 
 		if (response.ok) {
 			//if user signs up, redirects to the following place:
-			document.location.replace("/");
+			//	document.location.replace("/"); removed document.location.replace per advice from an LA
 		} else {
 			alert(response.statusText);
 		}

@@ -16,7 +16,7 @@ const sesh = {
 	resave: false,
 	saveUninitialized: false,
 };
-app.use(session(sesh));
+//app.use(session(sesh));
 
 const hbs = exphbs.create({});
 
@@ -26,9 +26,9 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(require("./controllers")); //added this line per ASK BCS skaliaperumal's advice
+//app.use(require("./controllers")); //added this line per ASK BCS skaliaperumal's advice
 
 app.listen(PORT, () => {
-	console.log(`App listening on port ${PORT}!`);
+	console.log(`Hey , YO, your app express is listening on port ${PORT}!`);
 	sequelize.sync({ force: false });
 });

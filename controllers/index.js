@@ -1,9 +1,7 @@
 const router = require("express").Router();
 
-const apiRoutes = require("./api");
-const pageRoutes = require("./pageRoutes");
+const blogRoutes = require("./blogsRoutes");
 
-router.use("/api", apiRoutes); //equivalent to localhost3001/api/
-router.use("/", pageRoutes); //equivalent to localhost3001/
+router.use("/blogs", blogRoutes); //give blogRoutes the path /blogs
 
 module.exports = router;
