@@ -29,6 +29,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //app.use(require("./controllers")); //added this line per ASK BCS skaliaperumal's advice
 
 app.listen(PORT, () => {
-	console.log(`Hey , YO, your app express is listening on port ${PORT}!`);
+	console.log(
+		`Hey , YO, your app express is listening on port ${PORT}! (techblog, server.js)`
+	);
 	sequelize.sync({ force: false });
 });

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 //const { json } = require("sequelize/types");
 const { Blogs, User } = require("../models");
+
 //rendering the main page
 console.log("about to render all Blogs");
 
@@ -19,9 +20,11 @@ router.get("/", async (req, res) => {
 		});
 		//Serialize data so the handlebars template can read it
 		const bloggs = blogsData.map((blag) => blag.get({ plain: true }));
+		//Pass the werialized data into template
 
-		res.render("mainpage", {
+		res.render("homepage", {
 			bloggs,
+			logged_in: req.session.logged_in, //hands the view the logged on status
 			//should probably also hand in the logged_in: req.session.logged_in
 		});
 	} catch (err) {
