@@ -5,7 +5,7 @@
   <!-- The contents of this card shows blog content using the post ID -->
   <a href="/post/{{id}}">
     <!-- href references the specific post (established in router.get("/post/:id")
-    which references the Blogs model which has "entry_title" and "entry" columns -->
+    which references the Blogs model which has "entry_title" and "entry" columns.  The whole post is a link to show the single blog post. -->
     <header>{{entry_title}}</header>
     <!-- The card also contains the entry content -->
     <p>{{entry}}</p>
