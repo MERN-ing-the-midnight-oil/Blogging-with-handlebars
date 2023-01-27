@@ -2,12 +2,9 @@ const router = require("express").Router();
 //const { json } = require("sequelize/types");
 const { Blogs, User } = require("../models");
 
-//rendering the main page
-console.log("about to render all Blogs");
-
+//render the main page
+//--------------------------------------------------------------------------------------
 router.get("/", async (req, res) => {
-	//home page on 3001
-
 	try {
 		//get all blogs and JOIN with user data, specifically the name
 		const blogsData = await Blogs.findAll({
@@ -33,6 +30,31 @@ router.get("/", async (req, res) => {
 	}
 });
 
+//Render the dashboard 
+//------------------------------------------------------------------------------------------
+router.get("/dash", withAuth, async (req, res) => {
+try{
+	//find the logged on user based on the session ID
+	const userData = await User.findByPk(req.session.user_id),{
+		attributes: { exclude: ['password'] },
+		include: [{ model: Blogs }],
+	}
+	const user = userData.get({ plain: true });
+	res.render('dashboard', {
+		...user,
+		logged_in: true,
+	});
+}
+catch (err) {
+	res.status(500).json(err);
+}
+});
+
+//------------------------------------------------------------------------------------------
+
+
+
+//render a blog post by id
 //------------------------------------------------------------------------------------------
 router.get("/post/:id", async (req, res) => {
 	try {
@@ -52,6 +74,10 @@ router.get("/post/:id", async (req, res) => {
 	} catch (err) {
 		res.status(500).json(err);
 	}
-});
+});d
+//------------------------------------------------------------------------------------------
 
+
+
+//------------------------------------------------------------------------------------------
 module.exports = router;
