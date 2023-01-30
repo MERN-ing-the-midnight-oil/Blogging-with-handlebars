@@ -1,13 +1,12 @@
 const loginFormHandler = async (event) => {
 	event.preventDefault();
-
 	// Collect values from the login form
 	const email = document.querySelector("#email-login").value.trim();
 	const password = document.querySelector("#password-login").value.trim();
 
 	if (email && password) {
 		// Send a POST request to the API endpoint
-		const response = await fetch("/api/users/login", {
+		const response = await fetch("/api/user/login", {
 			method: "POST",
 			body: JSON.stringify({ email, password }),
 			headers: { "Content-Type": "application/json" },
@@ -15,7 +14,7 @@ const loginFormHandler = async (event) => {
 
 		if (response.ok) {
 			// If successful posting a valid user name and password, redirect to the following endpoint
-			//	document.location.replace("/dashboard"); removed by LA's advice
+			document.location.replace("/dash");
 		} else {
 			alert(response.statusText);
 		}
@@ -30,7 +29,7 @@ const signupFormHandler = async (event) => {
 	const password = document.querySelector("#password-signup").value.trim();
 
 	if (name && email && password) {
-		const response = await fetch("/api/users", {
+		const response = await fetch("/api/user", {
 			//
 			method: "POST",
 			body: JSON.stringify({ name, email, password }),
@@ -39,7 +38,7 @@ const signupFormHandler = async (event) => {
 
 		if (response.ok) {
 			//if user signs up, redirects to the following place:
-			//	document.location.replace("/"); removed document.location.replace per advice from an LA
+			document.location.replace("/dash"); //go to the dashboard
 		} else {
 			alert(response.statusText);
 		}

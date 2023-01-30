@@ -6,6 +6,7 @@ const sequelize = require("../config/connection");
 
 class User extends Model {
 	checkPassword(loginPw) {
+		//is a method built in to my User object. takes in loginPw, uses compareSync method
 		//is a function, given a variable accepts a variable
 		//that exists in the body of request
 		return bcrypt.compareSync(loginPw, this.password);
@@ -42,6 +43,7 @@ User.init(
 	},
 	{
 		hooks: {
+			//hooks happen automatically before a new password is saved into db
 			beforeCreate: async (newUserData) => {
 				newUserData.password = await bcrypt.hash(newUserData.password, 10);
 				return newUserData;

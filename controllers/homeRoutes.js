@@ -1,6 +1,7 @@
 const router = require("express").Router();
 //const { json } = require("sequelize/types");
 const { Blogs, User } = require("../models");
+const withAuth = require("../utils/auth"); //will redirect un-logged in user to login
 
 //render the main page
 //--------------------------------------------------------------------------------------
@@ -30,30 +31,28 @@ router.get("/", async (req, res) => {
 	}
 });
 
-//Render the dashboard 
+//Render the dashboard
 //------------------------------------------------------------------------------------------
 router.get("/dash", withAuth, async (req, res) => {
-try{
-	//find the logged on user based on the session ID
-	const userData = await User.findByPk(req.session.user_id),
-	{
-		attributes: { exclude: ['password'] },
-		include: [{ model: Blogs }],
+	try {
+		//find the logged on user based on the session ID
+		const userData = await User.findByPk(req.session.user_id, {
+			attributes: { exclude: ["password"] },
+			include: [{ model: Blogs }],
+		});
+
+		const uzer = userData.get({ plain: true });
+
+		res.render("dashboard", {
+			...uzer,
+			logged_in: true,
+		});
+	} catch (err) {
+		res.status(500).json(err);
 	}
-	const user = userData.get({ plain: true });
-	res.render('dashboard', {
-		...user,
-		logged_in: true,
-	});
-}
-catch (err) {
-	res.status(500).json(err);
-}
 });
 
 //------------------------------------------------------------------------------------------
-
-
 
 //render a blog post by id
 //------------------------------------------------------------------------------------------
@@ -75,10 +74,20 @@ router.get("/post/:id", async (req, res) => {
 	} catch (err) {
 		res.status(500).json(err);
 	}
-});d
+});
 //------------------------------------------------------------------------------------------
 
-
-
+//render the Login Screen: Username, Password, "Login" "Sign Up instead"
 //------------------------------------------------------------------------------------------
+router.get("/login", (req, res) => {
+	// If the user is already logged in, redirect the request to another route
+	if (req.session.logged_in) {
+		res.redirect("/dash");
+		return;
+	}
+
+	res.render("login");
+});
+//---------------------------------------------------------------------------------------------
+
 module.exports = router;

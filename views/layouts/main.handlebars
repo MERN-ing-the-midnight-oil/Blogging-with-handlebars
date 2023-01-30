@@ -15,18 +15,18 @@
     <header class="display-flex justify-space-between align-center p-2">
     <nav>     
         <a href="/">Home</a>
-         <a href="/dash">Dashboard</a>
+    
    
     
   
          {{!-- Conditionally render login or logout links --}}
 
-        {{!-- {{#if logged_in}}
-        <a href="/profile">profile</a> |
+        {{#if logged_in}}
+        <a href="/dash">dashboard</a> |
         <button class="no-button" id="logout">logout</button>
         {{else}}
         <a href="/login">login</a>
-        {{/if}} --}}
+        {{/if}}
 
      </nav>
    
@@ -42,10 +42,10 @@
 
 {{!-- Render script for logged in users only  --}}
 
-  {{!-- {{#if logged_in}}
+  {{#if logged_in}}
   <script src="/js/logout.js"></script>
-  {{/if}} --}}
-
+  {{/if}}
+  
 </body>
 
 </html>
