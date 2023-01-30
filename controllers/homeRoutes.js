@@ -41,10 +41,10 @@ router.get("/dash", withAuth, async (req, res) => {
 			include: [{ model: Blogs }],
 		});
 
-		const uzer = userData.get({ plain: true });
+		const userblogs = userData.get({ plain: true });
 
 		res.render("dashboard", {
-			...uzer,
+			...userblogs,
 			logged_in: true,
 		});
 	} catch (err) {

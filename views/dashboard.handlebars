@@ -25,12 +25,9 @@
 
 
   <div class="col-md-6 blog-list">
-    <h3>Your Current Blogs:</h3>
-  {{#each userblogs as |asdf|}}
-  {{> SINGLEENTRY}}
-    {{/each}}
+  <h3>Your Current Blogs:</h3>
+     {{#each userblogs as |asdf|}}
+        {{> SINGLEENTRY}}
+      {{/each}}
   </div>
-
 </div>
-
-<script src="./js/profile.js"></script>
