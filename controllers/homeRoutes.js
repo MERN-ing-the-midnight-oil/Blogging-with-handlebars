@@ -36,17 +36,31 @@ router.get("/", async (req, res) => {
 router.get("/dash", withAuth, async (req, res) => {
 	try {
 		//find the logged on user based on the session ID
-		const userData = await User.findByPk(req.session.user_id, {
-			attributes: { exclude: ["password"] },
-			include: [{ model: Blogs }],
-		});
+		console.log(
+			`\n\n Hey this is homeRoutes.js and I'm trying to render the dashboard and this is the current UserID: ${JSON.stringify(
+				req.session.userID //showing as undefined
+			)}\n\n`
+		);
 
-		const userblogs = userData.get({ plain: true });
-
-		res.render("dashboard", {
-			...userblogs,
-			logged_in: true,
+		const myBlogsData = await Blogs.findAll({
+			where: {
+				user_id: req.session.user_id,
+			},
 		});
+		console.log(
+			`\n\n HEY!this is homeRoutes.js and I'm trying to render the dashboard and HERE IS THE My Blogs Data: ${JSON.stringify(
+				myBlogsData
+			)}\n\n`
+		);
+		const data = {
+			loggedIn: req.session.loggedIn,
+			blogs: myBlogsData.map((blog) => blog.get({ plain: true })),
+			//the dot map method is looping over each blog and does a dot get (cleans it up, removes the extra sequelize stuff)
+		};
+		console.log(
+			`\n\n HEY these are all your blogs!!! Data: ${JSON.stringify(data)}\n\n`
+		);
+		res.render("dashboard", { data });
 	} catch (err) {
 		res.status(500).json(err);
 	}

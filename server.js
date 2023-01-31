@@ -8,7 +8,6 @@ const helpers = require("./utils/helpers");
 
 //importing express-session, so we can save user data between URL reloads , for example whether the user is logged in or not
 //express-session is middleware
-//const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -17,7 +16,7 @@ const PORT = process.env.PORT || 3001;
 const sesh = {
 	secret: "o872of8hfo4uihofhoiufli3unlu",
 	cookie: {
-		maxAge: 300000,
+		maxAge: 3000000,
 		httpOnly: true,
 		secure: false,
 		sameSite: "strict",
