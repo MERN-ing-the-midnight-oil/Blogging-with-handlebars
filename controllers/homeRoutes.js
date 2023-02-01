@@ -53,7 +53,7 @@ router.get("/dash", withAuth, async (req, res) => {
 			)}\n\n`
 		);
 		const data = {
-			loggedIn: req.session.loggedIn,
+			loggedIn: req.session.logged_in, //"logged_in" was wrong
 			blogs: myBlogsData.map((blog) => blog.get({ plain: true })),
 			//the dot map method is looping over each blog and does a dot get (cleans it up, removes the extra sequelize stuff)
 		};

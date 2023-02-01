@@ -1,7 +1,6 @@
 const router = require("express").Router(); //pulls the router process from express
 const { User } = require("../../models");
 
-//router.use("/user", userRoutes); //url will be localhost3001/api/user
 //Creating a new user------------------------------------------------------------------------------------------------
 router.post("/", async (req, res) => {
 	try {
