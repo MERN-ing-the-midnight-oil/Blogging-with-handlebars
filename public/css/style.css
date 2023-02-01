@@ -9,6 +9,7 @@
   --border-radius: 0.3rem;
 }
 
+
 body {
   font-family: Arial;
   margin: 0;
@@ -43,7 +44,16 @@ aside {
 
 nav {
   display: flex;
-  background-color: var(--secondary);
+  
+  }
+nav a{
+padding: 5px;
+margin-left: 10px;
+background-color: var(--secondary);
+}
+
+.right {
+  float: right;
 }
 
 .menu-container {

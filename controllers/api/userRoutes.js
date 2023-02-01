@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
 		const userData = await User.create(req.body); //
 		req.session.save(() => {
 			//this is creating a cookie to send to the client
-			req.session.user_id = userData.id; //saved in cookie
+			req.session.user_id = userData.id; //saved in cookie //!!!!
 			req.session.logged_in = true; //saved in cookie
 
 			res.status(200).json(userData); //user data sent back to the browser (id, name, password)
