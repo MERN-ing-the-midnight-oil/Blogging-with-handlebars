@@ -1,18 +1,25 @@
 {{!-- single.handlebars is what shows when you click on a single blog and it is shown full view. It will also show all the comments --}}
+{{log "hey! ! ! ! ! this is the incoming new comment in single.handlebars:" comment}}
+
+
+{{! display the blog post--}}
 <div class="text-center">
 <p>{{entry_title}}</p>
 <p>{{entry}}</p>
+
 {{! display all the comments that belong to the above blog--}}
-{{#each comment as |comment| }}
+{{! each comment is turned off for now because coments dont exist yet --}}
+{{!-- {{#each comment as |comment| }}
 {{> singlecomment}}
-{{/each}}
+{{/each}} --}}
+
 {{!-- also put a form here for creating a new comments --}}
   <div class="col-md-6">
-    <h3>Comment on this Blog Post:</h3>
-    <form class="form new-project-form">
+    <h3>Create a new Comment on this Blog Post:</h3>
+    <form class="form new-comment-form">
       <div class="form-group">
-        <label for="blog-entry">Comment:</label>
-        <input class="form-input" type="text" id="comment-entry" name="comment-entry" />
+        <label for="comment">Comment:</label>
+        <input class="form-input" type="text" id="comment" name="comment" />
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit Comment</button>

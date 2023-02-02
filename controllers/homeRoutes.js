@@ -66,8 +66,9 @@ router.get("/dash", withAuth, async (req, res) => {
 	}
 });
 
-//------------------------------------------------------------------------------------------
+//coming soon- renderring a blog comment by id- turn on the each comment in single.handlebars when complete
 
+//------------------------------------------------------------------------------------------
 //render a blog post by id
 //------------------------------------------------------------------------------------------
 router.get("/post/:id", async (req, res) => {

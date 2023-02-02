@@ -14,13 +14,15 @@ const newFormHandler = async (event) => {
 		});
 
 		if (response.ok) {
-			document.location.replace("/dash");
+			document.location.replace("/");
 		} else {
 			alert("Failed to create comment");
 		}
 	}
 };
 
-document.querySelector(".asdf").addEventListener("submit", newFormHandler);
+document
+	.querySelector(".new-comment-form")
+	.addEventListener("submit", newFormHandler);
 
 module.exports = router;
