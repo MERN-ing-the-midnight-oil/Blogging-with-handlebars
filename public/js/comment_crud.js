@@ -32,4 +32,4 @@ document
 	.querySelector(".new-comment-form")
 	.addEventListener("submit", newFormHandler);
 
-module.exports = router;
+// module.exports = router; //removed per bcs advice
