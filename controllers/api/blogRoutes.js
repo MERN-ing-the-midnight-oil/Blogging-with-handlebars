@@ -9,7 +9,6 @@ router.post("/", withAuth, async (req, res) => {
 			user_id: req.session.user_id, //user_id is what the session knows the user ID as.
 		});
 		res.json({ ok: true });
-		//res.status(200).json(newBlogs);
 	} catch (err) {
 		res.status(400).json(err);
 	}

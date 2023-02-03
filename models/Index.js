@@ -29,4 +29,4 @@ Comments.belongsTo(User, {
 	onDelete: "Cascade",
 });
 
-module.exports = { User, Blogs };
+module.exports = { User, Blogs, Comments };

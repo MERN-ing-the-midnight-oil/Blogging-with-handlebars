@@ -39,5 +39,4 @@ Comments.init(
 		modelName: "comments", //establishes the name of the table as seen from mysql /the back end
 	}
 );
-
 module.exports = Comments; //exporting the model
