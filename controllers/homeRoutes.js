@@ -38,7 +38,7 @@ router.get("/dash", withAuth, async (req, res) => {
 		//find the logged on user based on the session ID
 		console.log(
 			`\n\n Hey this is homeRoutes.js and I'm trying to render the dashboard and this is the current UserID: ${JSON.stringify(
-				req.session.userID //showing as undefined
+				req.session.user_id //showing as undefined
 			)}\n\n`
 		);
 
