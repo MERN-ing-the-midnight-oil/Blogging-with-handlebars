@@ -10,7 +10,8 @@ router.post("/", async (req, res) => {
 	try {
 		const newComment = await Comments.create({
 			...req.body,
-			user_id: req.session.user.id,
+			//user_id: req.session.user.id,
+			user_id: req.session.user_id,
 		});
 		console.log(
 			"! ! ! This is the newComment we just did a POST with:",
