@@ -1,4 +1,5 @@
 const router = require("express").Router(); //pulls the router process from express
+const session = require("express-session");
 const { User } = require("../../models");
 
 //Creating a new user------------------------------------------------------------------------------------------------
@@ -52,6 +53,10 @@ router.post("/login", async (req, res) => {
 	} catch (err) {
 		res.status(400).json(err);
 	}
+	console.log(
+		"! ! ! ! ! ! ! you just logged on, this is the value of logged_in --->:" +
+			req.session.logged_in
+	);
 });
 
 router.post("/logout", (req, res) => {

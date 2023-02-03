@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
 		res.render("homepage", {
 			blogz,
-			//logged_in: req.session.logged_in, //hands the view the logged on status
+			logged_in: req.session.logged_in, //hands the view the logged on status
 			//should probably also hand in the logged_in: req.session.logged_in
 		});
 	} catch (err) {
@@ -38,7 +38,7 @@ router.get("/dash", withAuth, async (req, res) => {
 		//find the logged on user based on the session ID
 		console.log(
 			`\n\n Hey this is homeRoutes.js and I'm trying to render the dashboard and this is the current UserID: ${JSON.stringify(
-				req.session.user_id //showing as undefined
+				req.session.user_id
 			)}\n\n`
 		);
 
@@ -53,14 +53,14 @@ router.get("/dash", withAuth, async (req, res) => {
 			)}\n\n`
 		);
 		const data = {
-			loggedIn: req.session.logged_in, //"logged_in" was wrong
+			logged_in: req.session.logged_in,
 			blogs: myBlogsData.map((blog) => blog.get({ plain: true })),
 			//the dot map method is looping over each blog and does a dot get (cleans it up, removes the extra sequelize stuff)
 		};
 		console.log(
 			`\n\n HEY these are all your blogs!!! Data: ${JSON.stringify(data)}\n\n`
 		);
-		res.render("dashboard", { data });
+		res.render("dashboard", { data, logged_in: req.session.logged_in });
 	} catch (err) {
 		res.status(500).json(err);
 	}
