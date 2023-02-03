@@ -3,13 +3,19 @@ const { Comments } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 router.post("/", async (req, res) => {
-	console.log("posting a comment, about to try here is req.body:", req.body);
+	console.log(
+		"! ! ! this is commentsRoutes posting a comment, about to TRY- here is the req.body sent here from comment_crud.js:",
+		req.body
+	);
 	try {
 		const newComment = await Comments.create({
 			...req.body,
 			user_id: req.session.user.id,
 		});
-		console.log("! ! ! This is the newComment", newComment);
+		console.log(
+			"! ! ! This is the newComment we just did a POST with:",
+			newComment
+		);
 		res.json({ ok: true });
 	} catch (err) {
 		console.log(err);
