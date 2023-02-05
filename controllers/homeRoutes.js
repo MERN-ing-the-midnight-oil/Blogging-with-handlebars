@@ -66,30 +66,6 @@ router.get("/dash", withAuth, async (req, res) => {
 	}
 });
 
-//Renderring a blog comment by id
-//------------------------------------------------------------------------------------------
-router.get("/comment/:id", async (req, res) => {
-	// comment/:id is the URL of a particular comment
-	console.log("! ! ! This is homeRoutes, about to TRY to render a comment");
-	try {
-		const commentData = await Comments.findByPk(req.params.id, {
-			include: [
-				{
-					model: Blogs,
-					attributes: ["id"], //I want to include the blog_id of the blog that the comment belongs to.
-				},
-			],
-		});
-		const comment = commentData.get({ plain: true });
-		res.render("comment", {
-			...comment,
-			//logged_in req.session.logged_in,
-		});
-	} catch (err) {
-		res.status(500).json(err);
-	}
-});
-
 //render a blog post by id
 //------------------------------------------------------------------------------------------
 router.get("/post/:id", async (req, res) => {
@@ -111,6 +87,59 @@ router.get("/post/:id", async (req, res) => {
 		res.status(500).json(err);
 	}
 });
+
+router.get("/post/:id", async (req, res) => {
+	// comment/:id is the URL of a particular comment
+	console.log(
+		"! ! ! This is homeRoutes, about to TRY to render all comments for this post"
+	);
+	try {
+		const commentData = await Comments.findAll(req.params.id, {
+			include: [
+				{
+					model: Blogs,
+					attributes: ["id"], //I want to include the id of the blog that the comment belongs to. referred to as blog_id in comment model
+				},
+			],
+			where: { id: id }, //I want all coments where the blog id matches the req.params.id, assuming the req.params.id is what I suspect it is.
+		});
+		const comment = commentData.get({ plain: true });
+		// res.render("comment", {
+		res.render("single", {
+			//can I render this in "single" even though thats happening already?
+			...comment,
+			//logged_in req.session.logged_in,
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
+//Possibly useful- Finding a blog comment by particular id, which might be useful?
+//------------------------------------------------------------------------------------------
+// router.get("/comment/:id", async (req, res) => {
+// 	// comment/:id is the URL of a particular comment
+// 	console.log("! ! ! This is homeRoutes, about to TRY to render a comment");
+// 	try {
+// 		const commentData = await Comments.findByPk(req.params.id, {
+// 			include: [
+// 				{
+// 					model: Blogs,
+// 					attributes: ["id"], //I want to include the id of the blog that the comment belongs to. referred to as blog_id in comment model
+// 				},
+// 			],
+// 		});
+// 		const comment = commentData.get({ plain: true });
+// 		// res.render("comment", {
+// 		res.render("somewhere over the rainbow", {
+// 			...comment,
+// 			//logged_in req.session.logged_in,
+// 		});
+// 	} catch (err) {
+// 		res.status(500).json(err);
+// 	}
+// });
+
 //------------------------------------------------------------------------------------------
 
 //render the Login Screen: Username, Password, "Login" "Sign Up instead"

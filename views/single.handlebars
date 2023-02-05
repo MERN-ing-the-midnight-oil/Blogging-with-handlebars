@@ -1,13 +1,15 @@
 
 {{!-- single.handlebars is what shows when you click on a single blog and it is shown full view. It will also show all the comments also--}}
-{{log "hey! ! ! ! ! this is the incoming new comment in single.handlebars:" comment}}
 
 
-{{! display the blog post--}}
+
+{{! first display the blog post--}}
 <div class="text-center">
 <p>{{entry_title}}</p>
 <p>{{entry}}</p>
-{{! display all the comments that belong to the above blog--}}
+{{! next display all the comments that belong to the above blog--}}
+
+{{log "hey! ! ! ! ! this is the incoming new comment about to be rendered in single.handlebars using the partial comment.handlebars:" comment}}
 {{#each comment as |comment| }}
 {{> comment}}
 {{/each}}
