@@ -1,3 +1,4 @@
+//this file is the http request to the back end to POST a new comment
 const router = require("express").Router();
 const { Comments } = require("../../models");
 const withAuth = require("../../utils/auth");

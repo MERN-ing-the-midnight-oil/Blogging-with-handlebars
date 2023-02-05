@@ -1,6 +1,6 @@
 const router = require("express").Router();
 //const { json } = require("sequelize/types");
-const { Blogs, User } = require("../models");
+const { Blogs, User, Comments } = require("../models");
 const withAuth = require("../utils/auth"); //will redirect un-logged in user to login
 
 //render the main page
@@ -66,9 +66,30 @@ router.get("/dash", withAuth, async (req, res) => {
 	}
 });
 
-//coming soon- renderring a blog comment by id- turn on the each comment in single.handlebars when complete
-
+//Renderring a blog comment by id
 //------------------------------------------------------------------------------------------
+router.get("/comment/:id", async (req, res) => {
+	// comment/:id is the URL of a particular comment
+	console.log("! ! ! This is homeRoutes, about to TRY to render a comment");
+	try {
+		const commentData = await Comments.findByPk(req.params.id, {
+			include: [
+				{
+					model: Blogs,
+					attributes: ["blogs_id"], //I want to include the blog_id of the blog that the comment belongs to.
+				},
+			],
+		});
+		const comment = commentData.get({ plain: true });
+		res.render("comment", {
+			...comment,
+			//logged_in req.session.logged_in,
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
 //render a blog post by id
 //------------------------------------------------------------------------------------------
 router.get("/post/:id", async (req, res) => {

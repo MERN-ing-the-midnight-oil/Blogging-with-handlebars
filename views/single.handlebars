@@ -1,4 +1,5 @@
-{{!-- single.handlebars is what shows when you click on a single blog and it is shown full view. It will also show all the comments --}}
+
+{{!-- single.handlebars is what shows when you click on a single blog and it is shown full view. It will also show all the comments also--}}
 {{log "hey! ! ! ! ! this is the incoming new comment in single.handlebars:" comment}}
 
 
@@ -6,12 +7,10 @@
 <div class="text-center">
 <p>{{entry_title}}</p>
 <p>{{entry}}</p>
-
 {{! display all the comments that belong to the above blog--}}
-{{! each comment is turned off for now because coments dont exist yet --}}
-{{!-- {{#each comment as |comment| }}
-{{> singlecomment}}
-{{/each}} --}}
+{{#each comment as |comment| }}
+{{> comment}}
+{{/each}}
 
 {{!-- also put a form here for creating a new comments --}}
   <div class="col-md-6">
