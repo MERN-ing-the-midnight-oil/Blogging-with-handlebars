@@ -89,7 +89,6 @@ router.get("/post/:id", async (req, res) => {
 });
 
 router.get("/post/:id", async (req, res) => {
-	// comment/:id is the URL of a particular comment
 	console.log(
 		"! ! ! This is homeRoutes, about to TRY to render all comments for this post"
 	);
