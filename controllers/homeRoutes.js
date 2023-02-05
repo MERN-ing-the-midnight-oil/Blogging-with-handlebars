@@ -66,7 +66,7 @@ router.get("/dash", withAuth, async (req, res) => {
 	}
 });
 
-//render a blog post by id
+//render a blog post by id-  is it possible to grab associated comments at the same time?
 //------------------------------------------------------------------------------------------
 router.get("/post/:id", async (req, res) => {
 	try {
@@ -75,6 +75,8 @@ router.get("/post/:id", async (req, res) => {
 				{
 					model: User,
 					attributes: ["name"],
+					model: Comments,
+					attributes: ["entry"],
 				},
 			],
 		});
@@ -83,36 +85,41 @@ router.get("/post/:id", async (req, res) => {
 			...single,
 			//logged_in req.session.logged_in,
 		});
+		console.log(
+			"! ! ! ! The data just passed to single handlebars is : " +
+				JSON.stringify(single)
+		);
 	} catch (err) {
 		res.status(500).json(err);
 	}
 });
-
-router.get("/post/:id", async (req, res) => {
-	console.log(
-		"! ! ! This is homeRoutes, about to TRY to render all comments for this post"
-	);
-	try {
-		const commentData = await Comments.findAll(req.params.id, {
-			include: [
-				{
-					model: Blogs,
-					attributes: ["id"], //I want to include the id of the blog that the comment belongs to. referred to as blog_id in comment model
-				},
-			],
-			where: { id: id }, //I want all coments where the blog id matches the req.params.id, assuming the req.params.id is what I suspect it is.
-		});
-		const comment = commentData.get({ plain: true });
-		// res.render("comment", {
-		res.render("single", {
-			//can I render this in "single" even though thats happening already?
-			...comment,
-			//logged_in req.session.logged_in,
-		});
-	} catch (err) {
-		res.status(500).json(err);
-	}
-});
+//The following is an old attempt to get comments to render
+//------------------------------------------------------------------------------------------
+// router.get("/post/:id", async (req, res) => {
+// 	console.log(
+// 		"! ! ! This is homeRoutes, about to TRY to render all comments for this post"
+// 	);
+// 	try {
+// 		const commentData = await Comments.findAll(req.params.id, {
+// 			include: [
+// 				{
+// 					model: Blogs,
+// 					attributes: ["id"], //I want to include the id of the blog that the comment belongs to. referred to as blog_id in comment model
+// 				},
+// 			],
+// 			where: { id: id }, //I want all coments where the blog id matches the req.params.id, assuming the req.params.id is what I suspect it is.
+// 		});
+// 		const comment = commentData.get({ plain: true });
+// 		// res.render("comment", {
+// 		res.render("single", {
+// 			//can I render this in "single" even though thats happening already?
+// 			...comment,
+// 			//logged_in req.session.logged_in,
+// 		});
+// 	} catch (err) {
+// 		res.status(500).json(err);
+// 	}
+// });
 
 //Possibly useful- Finding a blog comment by particular id, which might be useful?
 //------------------------------------------------------------------------------------------

@@ -9,12 +9,14 @@
 <p>{{entry}}</p>
 {{! next display all the comments that belong to the above blog--}}
 
-{{log "hey! ! ! ! ! this is the incoming new comment about to be rendered in single.handlebars using the partial comment.handlebars:" comment}}
-{{#each comment as |comment| }}
+
+
+{{!-- The "entry" should mean each comment entry not each blog entry. the foreign key between comment and blogs is blogs_id, is that useful? --}}
+{{#each entry as |entry| }} 
 {{> comment}}
 {{/each}}
 
-{{!-- also put a form here for creating a new comments --}}
+{{!-- This is a form for creating a new comment --}}
   <div class="col-md-6">
     <h3>Create a new Comment on this Blog Post:</h3>
     <form class="form new-comment-form">
