@@ -76,7 +76,7 @@ router.get("/comment/:id", async (req, res) => {
 			include: [
 				{
 					model: Blogs,
-					attributes: ["blogs_id"], //I want to include the blog_id of the blog that the comment belongs to.
+					attributes: ["id"], //I want to include the blog_id of the blog that the comment belongs to.
 				},
 			],
 		});
