@@ -9,10 +9,17 @@
 <p>{{entry}}</p>
 {{! next display all the comments that belong to the above blog--}}
 
-{{!-- The "entry" should mean each comment entry not each blog entry.  --}}
-{{#each entry as |entry| }} 
+{{!--Note: The "entry" should mean each comment entry not each blog entry.  --}}
+{{!-- {{#each single.comments.entry as |entry| }} 
+{{> comment}}
+{{/each}} --}}
+
+{{!-- Note: well, that didn't work, lets just try printing each comment without using the partial --}}
+{{#each comments}} 
+{{entry}}
 {{> comment}}
 {{/each}}
+
 
 {{!-- This is a form for creating a new comment --}}
   <div class="col-md-6">
