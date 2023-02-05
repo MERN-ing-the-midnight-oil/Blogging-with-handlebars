@@ -9,9 +9,7 @@
 <p>{{entry}}</p>
 {{! next display all the comments that belong to the above blog--}}
 
-
-
-{{!-- The "entry" should mean each comment entry not each blog entry. the foreign key between comment and blogs is blogs_id, is that useful? --}}
+{{!-- The "entry" should mean each comment entry not each blog entry.  --}}
 {{#each entry as |entry| }} 
 {{> comment}}
 {{/each}}
