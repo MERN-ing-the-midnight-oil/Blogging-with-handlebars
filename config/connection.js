@@ -1,7 +1,7 @@
 //This is my connection to the back end
 
 const Sequelize = require("sequelize");
-// require("dotenv").config();
+require("dotenv").config();
 
 // const sequelize = new Sequelize(
 // 	process.env.DB_NAME,
