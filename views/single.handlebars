@@ -1,20 +1,13 @@
 
 {{!-- single.handlebars is what shows when you click on a single blog and it is shown full view. It will also show all the comments also--}}
 
-
-
 {{! first display the blog post--}}
 <div class="text-center">
 <p>{{entry_title}}</p>
 <p>{{entry}}</p>
 {{! next display all the comments that belong to the above blog--}}
 
-{{!--Note: The "entry" should mean each comment entry not each blog entry.  --}}
-{{!-- {{#each single.comments.entry as |entry| }} 
-{{> comment}}
-{{/each}} --}}
-
-{{!-- Note: well, that didn't work, lets just try printing each comment without using the partial --}}
+{{!--Note: "comments", part of the const single being sent here , is an array of "entry"'s--}}
 {{#each comments}} 
 {{entry}}
 {{> comment}}
