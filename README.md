@@ -10,7 +10,7 @@ The folder structure follows the Model-View-Controller paradigm. It uses Handleb
 
 ## Deployment
 
-The app can be found on github at https://github.com/Noctiluca-scintillans/Blogging-with-handlebars,
+The code repo can be found on github at https://github.com/Noctiluca-scintillans/Blogging-with-handlebars,
 and is deployed on Heroku at https://dashboard.heroku.com/apps/stormy-gorge-58008
 
 ## License:
